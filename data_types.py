@@ -24,28 +24,55 @@ bool2 = False
 # TODO paaiskinti prasme funcijos priemimo skliaustuose, pvz su sarasu def kazkas(kint1=None arba [])!
 none1 = None
 
+# Tuple - nemutabilus rinkiniai
+tuple1 = (1, 365, 14, 20) # tuple()
+
+
 # Complex variables !!!!!!!!!!!!!!!!!!!!! they are more like references in comples structures
 # List (Array) - sarasas, su pozicijomis ir pirma pozicija yra 0
 list1 = list()  # list1 = []
 list2 = []
-list3 = [bool1, bool2]
+list3 = [bool1, bool2, integer2, integer2]
 
 # Dictionaries - Objects - raktazodis: reiksme tipo duomeny stuktura, nera eilishkumo
 zodynas1 = dict()  # {}
 zodynas1['raktas_1'] = integer1 # speciali sintakse prideti i zodyna zodyno_kintamasis['naujas_raktas'] = reiksme
 zodynas1['raktas_2'] = bool2
-zodynas1['raktas_3'] = list3
+zodynas1['raktas_3'] = False #  list3
 
+abc4 = zodynas1.get('raktas_3', []) #, []) or []
+print("ABC$: ", abc4)
+
+abc = list3[0]
+abc2 = list3[1]
+maks_indexas = len(list3) - 1
+print(maks_indexas)
+index = 3
+if index <= maks_indexas:
+    abc3 = list3[index]
+    print("ABC3: ", abc3)
+else:
+    print("INDEX OUT OF RANGE!")
+
+print(list3, abc, abc2)
+# Sets - setai, unikaliu reiksmiu sarasas
+setas1 = set()  # pridejimo metodas .add()
+setas1.add(string2)
+setas1.add(string2)
+setas1.add(string1)
+print("SETAS1: ", setas1)
 
 print("ZODYNAS1: ", zodynas1)
 zodynas2 = zodynas1.copy()  #  sekli zodyno kopija, visi kompleksiniai duomenu tipai yra nuorodos ty tarp zodynu tas pats objektas
 print("ZODYNAS2: ", zodynas1)
 
-sarasas_x = zodynas2.get('raktas_3')
+sarasas_x = zodynas2.get('raktas_3', []) or []
 sarasas_x.append('NEMATYTA')
 print("LIST3: ", list3)
 print("ZODYNAS1: ", zodynas1)
 print("ZODYNAS2: ", zodynas2)
+
+zodynas2
 
 
 
