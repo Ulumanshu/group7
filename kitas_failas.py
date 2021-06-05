@@ -1,3 +1,3 @@
 from main import print_hi
 
-print_hi('1')
+print_hi('ABABABA')
