@@ -1,5 +1,6 @@
-## Data types - duomenu tipai
+# Data types - duomenu tipai
 
+# Simple data types they are direct values in complex structures
 # 1 Integer - Sveikas Skaicius
 integer1 = 1  # int()
 integer2 = 2
@@ -23,10 +24,29 @@ bool2 = False
 # TODO paaiskinti prasme funcijos priemimo skliaustuose, pvz su sarasu def kazkas(kint1=None arba [])!
 none1 = None
 
+# Complex variables !!!!!!!!!!!!!!!!!!!!! they are more like references in comples structures
 # List (Array) - sarasas, su pozicijomis ir pirma pozicija yra 0
 list1 = list()  # list1 = []
 list2 = []
 list3 = [bool1, bool2]
+
+# Dictionaries - Objects - raktazodis: reiksme tipo duomeny stuktura, nera eilishkumo
+zodynas1 = dict()  # {}
+zodynas1['raktas_1'] = integer1 # speciali sintakse prideti i zodyna zodyno_kintamasis['naujas_raktas'] = reiksme
+zodynas1['raktas_2'] = bool2
+zodynas1['raktas_3'] = list3
+
+
+print("ZODYNAS1: ", zodynas1)
+zodynas2 = zodynas1.copy()  #  sekli zodyno kopija, visi kompleksiniai duomenu tipai yra nuorodos ty tarp zodynu tas pats objektas
+print("ZODYNAS2: ", zodynas1)
+
+sarasas_x = zodynas2.get('raktas_3')
+sarasas_x.append('NEMATYTA')
+print("LIST3: ", list3)
+print("ZODYNAS1: ", zodynas1)
+print("ZODYNAS2: ", zodynas2)
+
 
 
 print("Visi sarasai po sukurimo", list1, list2, list3)
@@ -45,10 +65,6 @@ print("Mano Sarasas", mano_sarasas)
 print("Pirmas sveikas sk: ", type(integer1))
 
 # print('Visi sveiki skaiciai: ', integer1, integer2, integer3)
-
-
-
-
 
 
 
