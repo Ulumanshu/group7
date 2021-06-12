@@ -37,9 +37,12 @@ def sum_function_args(*args):
 
 def sum_function_kwargs(**kwargs):
     print(kwargs)
+    for e in kwargs:
+        print(e)
 
+    # raktai = kwargs.keys()
+    # reiksmes = kwargs.values()
     return sum(kwargs.values())
-
 
 
 sum_list = [5, 5, 5, 5]
@@ -48,6 +51,7 @@ sum_dict = {
     'raktas2': 2,
     'raktas3': 3,
 }
+
 sum1 = sum_function_args(*sum_list)
 sum2 = sum_function_args(1, 2, 3)
 
