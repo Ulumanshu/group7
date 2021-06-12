@@ -1,0 +1,11 @@
+grocery list
+============
+produce:
+    - appples - 2.99/1kg
+    - carrots - 3.56/1kg
+
+dry goods:
+    - pasta - 11.26/1kg
+    - rice - 22.34/1kg
+    - nuts - 17.64/1kg
+    - beans - 12.82/1kg

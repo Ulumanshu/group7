@@ -60,3 +60,14 @@ sum4 = sum_function_kwargs(raktas1=5, raktas2=4)
 
 print(sum1, sum2)
 print(sum3, sum4)
+
+def funkc(*args, **kwargs):
+    # susumuoti argsus
+    # Ishipakuoti kwrgsus ir sudeti i teksta
+    args_sum = sum(args)
+    tekstas = ''
+    for k, v in kwargs.items():
+        teksto_snippetas = f'\n'
+        tekstas += teksto_snippetas
+
+    return tekstas
