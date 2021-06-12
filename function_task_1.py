@@ -2,7 +2,7 @@
 # 2. Susideti duomenis i dictionary
 # 3. Sukurti nauja objekta kuriam butu aishkiai parasyta kiek kg galima itemo nupirkti uz biudzeta.
 # split()
-budet_limit = 15  # eu
+budget_limit = 15  # eu
 
 with open('data.txt', 'rt') as f:
     file_data = f.read()
