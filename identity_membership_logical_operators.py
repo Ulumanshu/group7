@@ -28,4 +28,5 @@ element_of_d2 = 0
 if d and len(d) >= target_element:
     element_of_d2 = d[target_element - 1]
 
-print(element_of_d2)
+print(element_of_d, 'abc\n', ' | ', element_of_d2, sep=' | ', end="= yummy \n")
+
