@@ -30,6 +30,6 @@ for k, v in product_dict.items():
     print(id_, name_, v)
 
 # list comp
-tavo_elmentas = [v for k, v in product_dict.items() if k[0] == 1234]
+tavo_elmentas = [v_ for k_, v_ in product_dict.items() if k_[0] == 1234]  # []
 tavo_elmentas = len(tavo_elmentas) > 0 and tavo_elmentas[0] or False
 print(tavo_elmentas)
