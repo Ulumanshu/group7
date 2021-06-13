@@ -24,3 +24,6 @@ phrase = "The animal I really dig, Above all others is the pig."
 # dig reverse
 dig = phrase[22:19:-1]
 print(dig)
+last_symbol = phrase[-1]  # . atgalinis indeksas nuo -1
+print(last_symbol)
+
