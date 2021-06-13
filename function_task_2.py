@@ -17,7 +17,7 @@ def get_weather_api_data(lon, lat, units="metric", lang="en"):
     headers = {
         'x-rapidapi-key': "f677aeeac1mshd2e756e85ff708dp1189dajsn297c80913788",
         'x-rapidapi-host': "weatherbit-v1-mashape.p.rapidapi.com"
-        }
+    }
 
     try:
         # Pats kreipimasis duomenu is interneto, naudojant requests.request funkcija,
@@ -94,3 +94,5 @@ if __name__ == "__main__":
 #                     'wind_dir': 280,
 #                     'wind_spd': 1.75472}]}
 
+list1 = ['a']
+list1 = list()
