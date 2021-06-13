@@ -14,3 +14,13 @@ print(splice3)
 
 splice4 = a_list[::-1]
 print(splice4)
+
+phrase = "The animal I really dig, Above all others is the pig."
+
+# mini uzduotis
+# 1. Ishlicinti dig, all, pig i kintamuosius, juos atprintinti
+# 2. apsukti zodi pig i gip ir apsukti zodi animal, i kintamuosius ir atprintinti.
+# pvz:
+# dig reverse
+dig = phrase[22:19:-1]
+print(dig)
