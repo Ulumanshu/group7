@@ -10,7 +10,7 @@ def get_weather_api_data(lon, lat, units="metric", lang="en"):
     result = {}
     url = "https://weatherbit-v1-mashape.p.rapidapi.com/current"
     # Api uzklausos parametrai ishsaugojami dictionary tipo strukturoje,
-    # kuria paduoda request funcijai kaip params parametra
+    # kuria paduoda request funkcijai kaip params parametra
     querystring = {"lon": str(lon), "lat": str(lat), "units": units, "lang": lang}
     # Api raktas pridedamas i request headeri kaip x-rapidapi-key, tai specifiska pagal Api tiekeja
     # ir randama jo tinkalapio dokumentacijoje.
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     pprint(api_response, indent=4)
 
 # Uzduotis:
-# 1. Sukurti funcija kuri is atsakymo duomenu strukturos istrauks city_name, temp ir weather - description - code
+# 1. Sukurti funkcija kuri is atsakymo duomenu strukturos istrauks city_name, temp ir weather - description - code
 # bei datetime laukus ir grazins mazesni dictionary tik su reikalingais duomenimis.
 
 # 2. Sukurti funkcija kuri pagal salyga (pvz temperatura maziau uz 15 arba weather code 500 (lyja)),
@@ -94,5 +94,3 @@ if __name__ == "__main__":
 #                     'wind_dir': 280,
 #                     'wind_spd': 1.75472}]}
 
-list1 = ['a']
-list1 = list()
