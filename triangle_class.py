@@ -3,14 +3,20 @@ import matplotlib.pyplot as plt
 
 
 class Triangle:
+
+    __count = 0
+    plot = plt
+
     def __init__(self, a=(0, 0), b=(0, 1), c=(1, 0)):
+        Triangle.__count += 1
+        self.id = Triangle.__count
         self.point_1 = a
         self.point_2 = b
         self.point_3 = c
         self.plot = plt
 
     def __repr__(self):
-        return f"Trikampis A: {self.point_1}, B: {self.point_2}, C: {self.point_3}"
+        return f"Trikampis id: {self.id}, A: {self.point_1}, B: {self.point_2}, C: {self.point_3}"
 
     def perimeter(self):
         # 1ma nuo self.point_1 iki self.point_2
@@ -32,12 +38,21 @@ class Triangle:
         l3_x_values = [self.point_3[0], self.point_1[0]]
         l3_y_values = [self.point_3[1], self.point_1[1]]
         self.plot.plot(l3_x_values, l3_y_values, linewidth=0.25, color='red')
-        self.plot.show()
+
+    @classmethod
+    def how_many_triangles(cls):
+        return cls.__count
+
+    @classmethod
+    def plot_all(cls):
+        cls.plot.show()
 
 
 if __name__ == "__main__":
     triangle_data = [
         ((1, 2), (1, 6), (2, 4)),
+        ((2, 3), (2, 7), (3, 5)),
+        ((3, 4), (3, 8), (8, 6)),
     ]
     new_triangles = []
     for t_data in triangle_data:
@@ -51,6 +66,11 @@ if __name__ == "__main__":
     for triangle in new_triangles:
         print(triangle.perimeter())
         triangle.plot_me()
+
+    number_of_objects = new_triangles[0].how_many_triangles()
+    print(f'number of triangles: {number_of_objects}')
+    print(new_triangles)
+    Triangle.plot_all()
 
  # trikampis1 = Triangle()
 # print(trikampis1.point_1, trikampis1.point_2, trikampis1.point_3)
