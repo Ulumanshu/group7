@@ -133,6 +133,10 @@ class Triangle(AbstractFigure):
 
 # Sutvarkyti Rectangle taip kaip sutvarkytas Triangle, kad jis sudarytu 4 line objektai, veiktu perimetras etc.
 # Sutvarkyti klases Circle perimetro funcija
+# Kiti daugiakampiai
+
+# Kokia kita funcija pvz sinusoida # sunku
+
 
 class Rectangle(AbstractFigure):
     def __init__(self, a=(0, 0), b=(0, 1), c=(1, 0), d=(1, 1), colour='red'):
