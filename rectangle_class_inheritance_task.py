@@ -18,7 +18,7 @@ class AbstractFigure:
         self.plot.plot([x], [y], marker='o', markersize=3, color=color)
 
     def draw_circle(self, x, y, radius, color):
-        circle = plt.Circle((x, y), radius, color=color)
+        circle = self.plot.Circle((x, y), radius, color=color)
         self.plot.gca().add_patch(circle)
 
     @classmethod
@@ -30,33 +30,15 @@ class AbstractFigure:
         cls.plot.show()
 
 
-class Circle(AbstractFigure):
-    def __init__(self, coordinates, radius=1, color='red'):
-        super(Circle, self).__init__(plt)
-        self.coordinates = coordinates
-        self.center = coordinates[0]
-        self.radius = radius
-        self.color = color
-
-    def __repr__(self):
-        return f"Taskas id: {self.id}, centras: {self.center}"
-
-    def perimeter(self):
-        return 0
-
-    def plot_me(self):
-        self.draw_circle(self.center[0], self.center[1], self.radius, self.color)
-
-
 class Dot(AbstractFigure):
-    def __init__(self, coordinates, color='red'):
+    def __init__(self, coordinates, color="red"):
         super(Dot, self).__init__(plt)
         self.coordinates = coordinates
         self.center = coordinates[0]
         self.color = color
 
     def __repr__(self):
-        return f"Taskas id: {self.id}, centras: {self.center}"
+        return f"Dot id: {self.id}, center: {self.center}"
 
     def perimeter(self):
         return 0
@@ -65,37 +47,92 @@ class Dot(AbstractFigure):
         self.draw_dot(self.center[0], self.center[1], self.color)
 
 
-class Triangle(AbstractFigure):
-    def __init__(self, a=(0, 0), b=(0, 1), c=(1, 0)):
-        super(Triangle, self).__init__(plt)
-        self.point_1 = a
-        self.point_2 = b
-        self.point_3 = c
+class Circle(AbstractFigure):
+    def __init__(self, coordinates, radius=1, color="red"):
+        super(Circle, self).__init__(plt)
+        self.coordinates = coordinates
+        self.center = coordinates[0]
+        self.radius = radius
+        self.color = color
 
     def __repr__(self):
-        return f"Trikampis id: {self.id}, A: {self.point_1}, B: {self.point_2}, C: {self.point_3}"
+        return f"Radius id: {self.id}, center: {self.center}"
 
     def perimeter(self):
-        # 1ma nuo self.point_1 iki self.point_2
-        first_line = sqrt(pow(self.point_2[0] - self.point_1[0], 2) + pow(self.point_2[1] - self.point_1[1], 2))
-        # 2a nuo self.point_2 iki self.point_3
-        second_line = sqrt(pow(self.point_3[0] - self.point_2[0], 2) + pow(self.point_3[1] - self.point_2[1], 2))
-        # 3ia nuo self.point_3 iki self.point_1
-        third_line = sqrt(pow(self.point_1[0] - self.point_3[0], 2) + pow(self.point_1[1] - self.point_3[1], 2))
-        perimeter = first_line + second_line + third_line
-        return perimeter
+        return 0
 
     def plot_me(self):
-        l1_x_values = [self.point_1[0], self.point_2[0]]
-        l1_y_values = [self.point_1[1], self.point_2[1]]
-        self.plot.plot(l1_x_values, l1_y_values, linewidth=0.25, color='red')
-        l2_x_values = [self.point_2[0], self.point_3[0]]
-        l2_y_values = [self.point_2[1], self.point_3[1]]
-        self.plot.plot(l2_x_values, l2_y_values, linewidth=0.25, color='red')
-        l3_x_values = [self.point_3[0], self.point_1[0]]
-        l3_y_values = [self.point_3[1], self.point_1[1]]
-        self.plot.plot(l3_x_values, l3_y_values, linewidth=0.25, color='red')
+        self.draw_circle(self.center[0], self.center[1], self.radius, self.color)
 
+
+class Line(AbstractFigure):
+    def __init__(self, coordinates, color="red"):
+        super(Line, self).__init__(plt)
+        self.coordinates = coordinates
+        self.check_valid(self.coordinates)
+        self.length = self.calculate_length()
+        self.center = coordinates[0]
+        self.color = color
+
+    def __repr__(self):
+        return f"Line id: {self.id}, center: {self.center}"
+
+    def perimeter(self):
+        return self.calculate_length()
+
+    def plot_me(self):
+        x_values = [self.coordinates[0][0], self.coordinates[1][0]]
+        y_values = [self.coordinates[0][1], self.coordinates[1][1]]
+        self.draw_line(x_values, y_values, self.color)
+
+    @classmethod
+    def check_valid(cls, coordinates):
+        if len(coordinates) != 2:
+            raise ValueError(f'Line must have 2 points :{coordinates}')
+
+    def calculate_length(self):
+        point_1 = self.coordinates[0]
+        point_2 = self.coordinates[1]
+        return sqrt(pow(point_2[0] - point_1[0], 2) + pow(point_2[1] - point_1[1], 2))
+
+
+class Triangle(AbstractFigure):
+    def __init__(self, coordinates, color="black"):
+        super(Triangle, self).__init__(plt)
+        self.coordinates = coordinates
+        self.check_valid(self.coordinates)
+        self.color = color
+        self.lines = []
+        self.create_figure_lines()
+        # self.length = self.calculate_length()
+        # self.center = coordinates[0]
+
+    def __repr__(self):
+        return f"Trikampis id: {self.id}, Coordinates: {self.coordinates}"
+
+    def create_figure_lines(self):
+        for i in range(len(self.coordinates)):
+            line_coordinates = self.coordinates[i:i + 2]
+            if len(line_coordinates) == 1:
+                line_coordinates = [line_coordinates[0], self.coordinates[0]]
+            print(line_coordinates)
+            line_object = Line(line_coordinates, self.color)
+            self.lines.append(line_object)
+
+    def perimeter(self):
+        return sum([line.length for line in self.lines])
+
+    def plot_me(self):
+        for line in self.lines:
+            line.plot_me()
+
+    @classmethod
+    def check_valid(cls, coordinates):
+        if len(coordinates) != 3:
+            raise ValueError(f'Triangle must have 3 points :{coordinates}')
+
+# Sutvarkyti Rectangle taip kaip sutvarkytas Triangle, kad jis sudarytu 4 line objektai, veiktu perimetras etc.
+# Sutvarkyti klases Circle perimetro funcija
 
 class Rectangle(AbstractFigure):
     def __init__(self, a=(0, 0), b=(0, 1), c=(1, 0), d=(1, 1), colour='red'):
@@ -121,7 +158,6 @@ class Rectangle(AbstractFigure):
     def check_valid(cls, l1, l2, l3, l4):
         if l1 != l3:
             raise ValueError(f'l1:{l1} nelygu l3:{l3}')
-
         if l2 != l4:
             raise ValueError(f'l2:{l2} nelygu l4:{l4}')
 
@@ -142,18 +178,22 @@ class Rectangle(AbstractFigure):
 
 class FigureFactory:
     def __init__(self, input_data):
-        self.coordinate_list = input_data[0]
+        self.coordinates_list = input_data[0]
         self.color = input_data[1]
         self.radius = len(input_data) > 2 and input_data[2] or 0
         self.figure_object = False
         self.choose_figure()
 
     def choose_figure(self):
-        if len(self.coordinate_list) == 1:
+        if len(self.coordinates_list) == 1:
             if self.radius:
-                self.figure_object = Circle(self.coordinate_list, self.radius, self.color)
+                self.figure_object = Circle(self.coordinates_list, self.radius, self.color)
             else:
-                self.figure_object = Dot(self.coordinate_list, self.color)
+                self.figure_object = Dot(self.coordinates_list, self.color)
+        elif len(self.coordinates_list) == 2:
+            self.figure_object = Line(self.coordinates_list, self.color)
+        elif len(self.coordinates_list) == 3:
+            self.figure_object = Triangle(self.coordinates_list, self.color)
 
 
 if __name__ == "__main__":
@@ -167,72 +207,25 @@ if __name__ == "__main__":
     # ((1, 2), (1, 3), (3, 3), (3, 2), 'green'),
     # ((1, 1), (1, 8), (4, 8), (4, 1), 'red'),
     # ]
-    # new_triangles = []
-    # new_square = []
-    #
-    #
-    # for t_data in triangle_data:
-    # a = t_data[0]
-    # b = t_data[1]
-    # c = t_data[2]
-    # naujas_trikampis = Triangle(a, b, c)
-    # new_triangles.append(naujas_trikampis)
-    # naujas_trikampis.plot_me()
-    # print(naujas_trikampis.perimeter())
-    #
-    # for t_data in square_data:
-    # a = t_data[0]
-    # b = t_data[1]
-    # c = t_data[2]
-    # d = t_data[3]
-    # colour = t_data[4]
-    # try:
-    # naujas_kvadratas = Rectangle(a, b, c, d, colour)
-    # new_square.append(naujas_kvadratas)
-    # naujas_kvadratas.plot_me()
-    # print(naujas_kvadratas.perimeter())
-    #
-    # except ValueError as r:
-    # print(r, t_data)
-    # continue
-    #
-    # Rectangle.plot_all()
 
-    # number_of_objects = new_triangles[0].how_many_figures()
-    # print(f'number of triangles: {number_of_objects}')
-
-    # circle_data = []
-    # for circle in dot_data:
-    # print(dot)
-    # cordinates = circle[0]
-    # spalva = circle[1]
-    # print(cordinates)
-    # print(spalva)
-    # circle_objektas = Circle(cordinates, color='yellow')
-    # circle_objektas.plot_me()
-    # circle_data.append(circle_objektas)
-
-    dot_data = [
+    figure_data = [
         ([(1, 2)], 'blue', 5),
-        ([(3, 3)], 'blue'),
-        ([(4, 8)], 'blue', 2),
-        ([(10, 10)], 'blue'),
+        ([(3, 3)], 'red'),
+        ([(4, 8)], 'yellow', 2),
+        ([(10, 10)], 'magenta'),
+        ([(1, 2), (3, 4)], 'black'),
+        ([(3, 3), (3, 7)], 'black'),
+        ([(4, 8), (8, 12)], 'black'),
+        ([(10, 10), (4, 8)], 'black'),
+        ([(1, 2), (1, 6), (2, 4)], 'black')
     ]
-    dot_list = []
-    for dot in dot_data:
-        dot_objektas = FigureFactory(dot)
-        dot_objektas.figure_object.plot_me()
-        dot_list.append(dot_objektas)
 
-    pirmas_taskas = dot_list[0]
-    print(dot_data)
+    figure_list = []
+    for figure in figure_data:
+        abs_figure_object = FigureFactory(figure)
+        abs_figure_object.figure_object.plot_me()
+        figure_list.append(abs_figure_object)
+        print(type(abs_figure_object.figure_object), abs_figure_object.figure_object.perimeter())
 
-    for dot in dot_list:
-        print(type(dot.figure_object))
-
-    pirmas_taskas.figure_object.plot_all()
-
-
-
-
-
+    first_figure = figure_list[0]
+    first_figure.figure_object.plot_all()
