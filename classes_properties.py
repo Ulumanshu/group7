@@ -30,3 +30,4 @@ if __name__ == "__main__":
     print(my_dog.age)  # Reads age - uses a getter
     print(my_dog.animal_code)
     del my_dog.age
+    a = sorted()
