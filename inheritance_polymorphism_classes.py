@@ -141,4 +141,3 @@ if __name__ == "__main__":
 
     number_of_objects = new_triangles[0].how_many_figures()
     print(f'number of triangles: {number_of_objects}')
-
